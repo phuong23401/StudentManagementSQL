@@ -1,0 +1,97 @@
+CREATE TABLE `address`(
+                          `id` INT PRIMARY KEY,
+                          `address` VARCHAR(50)
+);
+
+CREATE TABLE `classes`(
+                          `id` INT PRIMARY KEY,
+                          `language` VARCHAR(50),
+                          `description` VARCHAR(50)
+);
+
+CREATE TABLE `students`(
+                           `id` INT PRIMARY KEY,
+                           `fullname` VARCHAR(50),
+                           `address_id` INT,
+                           FOREIGN KEY (address_id) REFERENCES `address`(id)
+);
+
+CREATE TABLE `course`(
+                         `id` INT PRIMARY KEY,
+                         `name` VARCHAR(50),
+                         `description` VARCHAR(50)
+);
+
+CREATE TABLE `point`(
+                        `id` INT PRIMARY KEY,
+                        `course_id` INT,
+                        `student_id` INT,
+                        `point` INT,
+                        FOREIGN KEY (course_id) REFERENCES `course`(id),
+                        FOREIGN KEY (student_id) REFERENCES `students`(id)
+);
+
+-- Thống kê học viên các lớp:
+SELECT COUNT(`course_id`)
+FROM `point`
+WHERE course_id = 1;
+
+SELECT COUNT(`course_id`)
+FROM `point`
+WHERE course_id = 2;
+
+SELECT COUNT(`course_id`)
+FROM `point`
+WHERE course_id = 3;
+
+SELECT COUNT(`course_id`)
+FROM `point`
+WHERE course_id = 4;
+
+SELECT COUNT(`course_id`)
+FROM `point`
+WHERE course_id = 5;
+
+-- Thống kê học viên các tỉnh:
+SELECT COUNT(`address_id`)
+FROM `students`
+WHERE address_id = 1;
+
+SELECT COUNT(`address_id`)
+FROM `students`
+WHERE address_id = 2;
+
+SELECT COUNT(`address_id`)
+FROM `students`
+WHERE address_id = 3;
+
+SELECT COUNT(`address_id`)
+FROM `students`
+WHERE address_id = 4;
+
+SELECT COUNT(`address_id`)
+FROM `students`
+WHERE address_id = 5;
+
+-- Điểm trung bình các khóa học:
+SELECT AVG(`point`)
+FROM `point`
+WHERE course_id = 1;
+
+SELECT AVG(`point`)
+FROM `point`
+WHERE course_id = 2;
+
+SELECT AVG(`point`)
+FROM `point`
+WHERE course_id = 3;
+
+SELECT AVG(`point`)
+FROM `point`
+WHERE course_id = 4;
+
+SELECT AVG(`point`)
+FROM `point`
+WHERE course_id = 5;
+
+-- Khóa học có điểm trung bình cao nhất:
